@@ -1,13 +1,13 @@
-import React from "react";
-import { Text, View } from "react-native";
+import React, { useContext } from "react";
 import Layout from "../Layout";
+import CardList from "../HomeScreen/CardList";
+import { FavoriteContext } from "./FavoriteContext";
 
 const FavoriteScreen = () => {
+  const { favorites } = useContext(FavoriteContext);
   return (
     <Layout>
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>Favorite!</Text>
-      </View>
+      <CardList photos={favorites} />
     </Layout>
   );
 };

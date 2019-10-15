@@ -3,9 +3,11 @@ import { AppLoading } from "expo";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import HomeScreen from "./app/HomeScreen/index";
+import { FavoriteContext } from "./app/FavoriteScreen/FavoriteContext";
 
 const App = () => {
   const [isReady, setIsReady] = useState(false);
+  const [favorites, setFavorites] = useState([]);
   useEffect(() => {
     const loadFont = async () => {
       await Font.loadAsync({
@@ -22,7 +24,11 @@ const App = () => {
     return <AppLoading />;
   }
 
-  return <HomeScreen />;
+  return (
+    <FavoriteContext.Provider value={{ favorites, setFavorites }}>
+      <HomeScreen />
+    </FavoriteContext.Provider>
+  );
 };
 
 export default App;

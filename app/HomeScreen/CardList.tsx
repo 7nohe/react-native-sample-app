@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Button,
   Left,
@@ -11,7 +11,7 @@ import {
   Thumbnail
 } from "native-base";
 import { Image } from "react-native";
-
+import { FavoriteContext } from "../FavoriteScreen/FavoriteContext";
 interface Photo {
   download_url: string;
   id: string;
@@ -21,7 +21,9 @@ interface Photo {
 interface IProps {
   photos: Photo[];
 }
+
 const CardList = (props: IProps) => {
+  const { favorites, setFavorites } = useContext(FavoriteContext);
   return (
     <>
       {props.photos.map(photo => (
@@ -50,9 +52,14 @@ const CardList = (props: IProps) => {
           </CardItem>
           <CardItem>
             <Left>
-              <Button transparent>
+              <Button
+                transparent
+                onPress={() => {
+                  favorites.push(photo);
+                  setFavorites(favorites);
+                }}
+              >
                 <Icon active name="thumbs-up" />
-                <Text>12 Likes</Text>
               </Button>
             </Left>
             <Body>
